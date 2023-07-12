@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <!-- Required meta tags -->
+
+    <!-- Set the Character set for the page -->
+    <meta charset="UTF-8" />
+
+    <!-- Let the page adapt to client device -->
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <!-- Link to external resource (css, search, etc.) -->
+    <!-- Link to Bootstrap CSS in this case -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+      integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
+      crossorigin="anonymous"
+    />
+
+    <title>Student Registration Directory</title>
+  </head>
+
+  <body>
+    <div class="container">
+      <h3 th:text="${courseName}"></h3>
+      <hr />
+
+      <!-- Add a button-->
+      <a
+        th:href="@{/studentregistrations/showFormForAdd(courseId=${courseId})}"
+        class="btn btn-primary btn-sm mb-3"
+      >
+        Add Student
+      </a>
+      <!-- Add a Logout button-->
+       <a
+        th:href="@{/logout}"
+        class="btn btn-danger btn-sm mb-3"
+      >
+        Logout
+      </a>
+
+      <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+          <tr>
+            <th>Student Name</th>
+            <th>Year of Registration</th>
+            <th>Year of Studies</th>
+            <th>Current Semester</th>
+            <th>Project Grade</th>
+            <th>Course Grade</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr th:each="tempStudent : ${studentregistrations}">
+            <td th:text="${tempStudent.studentName}" />
+            <td th:text="${tempStudent.studentYearOfRegistration}" />
+            <td th:text="${tempStudent.studentYearOfStudies}" />
+            <td th:text="${tempStudent.studentCurrentSemester}" />
+            <td th:text="${tempStudent.studentProjectGrade}" />
+            <td th:text="${tempStudent.studentCourseGrade}" />
+            
+
+            <td>
+              <!-- Add "update" button/link -->
+              <a
+                th:href="@{/studentregistrations/showFormForUpdate(studentId=${tempStudent.studentId})}"
+                class="btn btn-info btn-sm"
+              >
+                Update
+              </a>
+
+              <!-- Add "delete" button/link -->
+              <a
+                th:href="@{/studentregistrations/delete(studentId=${tempStudent.studentId})}"
+                class="btn btn-danger btn-sm"
+                onclick="if (!(confirm('Are you sure you want to delete this student?'))) return false"
+              >
+                Delete
+               <!-- Add "Grade" button/link -->
+              </a>
+              
+                <!-- button colors: https://getbootstrap.com/docs/4.0/components/buttons/ -->
+              <a
+                th:href="@{/studentregistrations/showFormForGrade(studentId=${tempStudent.studentId})}"
+                class="btn btn-success btn-sm"
+              >
+                Edit Grades
+              </a>
+
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <a th:href="@{/courses/list}">Back to Courses List</a>
+    </div>
+  </body>
+</html>

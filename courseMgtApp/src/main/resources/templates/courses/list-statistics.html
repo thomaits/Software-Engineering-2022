@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <!-- Required meta tags -->
+
+    <!-- Set the Character set for the page -->
+    <meta charset="UTF-8" />
+
+    <!-- Let the page adapt to client device -->
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <!-- Link to external resource (css, search, etc.) -->
+    <!-- Link to Bootstrap CSS in this case -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+      integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
+      crossorigin="anonymous"
+    />
+
+    <title>Course Statistics</title>
+  </head>
+
+  <body>
+    <div class="container">
+      <h3 th:text="${courseName}"></h3>
+      <hr />
+      
+      <!-- Add a Logout button-->
+       <a
+        th:href="@{/logout}"
+        class="btn btn-danger btn-sm mb-3"
+      >
+        Logout
+      </a>
+      
+	<!-- Hidden field courseId -->
+	<!-- <input type="hidden" th:field="*{courseId}" /> -->
+	 
+      <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+          <tr>
+            <th>Min</th>
+            <th>Max</th>
+            <th>Mean</th>
+            <th>Median</th>
+            <th>Skewness</th>
+            <th>Kurtosis</th>
+            <th>st. Deviation</th>
+            <th>Variance</th>
+          </tr>
+        <tbody> 
+        <tr>
+           <td th:text="${min}" />
+           <td th:text="${max}" />
+            <td th:text="${mean}" />
+           <td th:text="${median}" />
+           <td th:text="${skewness}" />
+           <td th:text="${kurtosis}" />
+           <td th:text="${standardDeviation}" />
+           <td th:text="${variance}" />
+		</tr>
+        </tbody>
+      </table>
+      
+       <a th:href="@{/courses/list}">Back to Courses List</a>
+    </div>
+  </body>
+</html>
